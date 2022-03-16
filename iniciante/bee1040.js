@@ -1,24 +1,37 @@
-var input = require('fs').readFileSync('stdin', 'utf8');
-var lines = input.split(' ');
+//Esse não consegui fazer de jeito nenhum... peguei a resolução por aqui https://github.com/debora28/uri-judge-exercicios/blob/master/uri1040.js
 
-var [n1,n2,n3,n4, final] = lines.map(a=>parseFloat(a));
 
-let media = (n1*2+n2*3+n3*4+n4*1)/10;
-let mediaf = (media+final)/2;
+var input = require("fs").readFileSync("./dev/stdin", "utf-8");
+var lines = input.split("\n");
+notas = lines.shift();
+exame = lines.shift();
 
-if(media >= 7){
-    console.log(`Media: ${media}`);
-    console.log(`Aluno aprovado.`);
-}
-else if(media < 5){
-    console.log(`Media: ${media}`);
-    console.log(`Aluno reprovado.`);
-}
-else{
-    console.log(`Media: ${media}`);
-    console.log(`Aluno em exame.`);
-    console.log(`Nota do exame: ${final}`);
-    if(media >= 5){console.log('Aulo aprovado.');}
-    else{console.log('Aluno reprovado.');}
-    console.log(`Media final: ${mediaf}`);
+notas = input.split(" ");
+
+let n1 = parseFloat(notas.shift());
+let n2 = parseFloat(notas.shift());
+let n3 = parseFloat(notas.shift());
+let n4 = parseFloat(notas.shift());
+
+let media = ((n1 * 2) + (n2 * 3) + (n3 * 4) + (n4 * 1)) / 10;
+console.log(`Media: ${media.toFixed(1)}`);
+
+if (media >= 7.0) {
+  console.log("Aluno aprovado.");
+} else if (media < 5.0) {
+  console.log("Aluno reprovado.");
+} else  if ( media >= 5.0 && media <= 6.9 ) {
+  
+  exame = parseFloat(exame);
+  console.log("Aluno em exame.");
+  console.log(`Nota do exame: ${exame.toFixed(1)}`);
+  media = (media + exame) / 2;
+
+  if (media >= 5.0) {
+    console.log("Aluno aprovado.");
+  } else {
+    console.log("Aluno reprovado.");
+  }
+
+  console.log(`Media final: ${media.toFixed(1)}`);
 }
