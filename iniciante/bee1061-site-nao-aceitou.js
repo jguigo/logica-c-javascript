@@ -10,25 +10,42 @@ let tfinal = (lines[3].replaceAll(' : ', ' ').split(' '));
 const [hi,mi,si] = tinicio.map(a=>parseInt(a));
 const [hf,mf,sf] = tfinal.map(a=>parseInt(a));
 
-let dia = df-di;
-let horas = hf-hi;
-let minutos = mf-mi;
-let segundos = sf - si;
+let segundos = 0;
+let minutos = 0;
+let horas = 0;
+let dias = 0;
 
-if(hf<hi){
-    dia--;
-    horas = 24+hf-hi;
-}
-if(mf<mi){
-    horas--;
-    minutos = 60+mf-mi;
-} 
-if(sf<si){
+if(si>sf){
     minutos--;
-    segundos = 60+mf-mi;
-} 
+    segundos = 60+sf-si
+} else segundos = sf-si
+if(mi>mf){
+    horas--;
+    minutos += 60 + mf - mi;
+} else {
+    minutos += mf-mi
+    if(minutos < 0){
+        minutos = 59;
+        horas--
+    };
+}
+if(hi>hf){
+    dias--;
+    horas += 24+hf-hi;
+} else {
+    horas += hf-hi
+    if(horas < 0){
+    horas = 23;
+    dias--
+    }
+}
+if(di<=df){
+    dias += df-di;
+    if(dias < 0) dias = 0;
+}
 
-console.log(`${dia} dia(s)`);
+
+console.log(`${dias} dia(s)`);
 console.log(`${horas} hora(s)`);
 console.log(`${minutos} minuto(s)`);
 console.log(`${segundos} segundo(s)`);
